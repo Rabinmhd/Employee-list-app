@@ -1,36 +1,19 @@
 import 'package:employee_list_app/pages/employ_add_page.dart';
 import 'package:employee_list_app/pages/provider/employee_provider.dart';
-import 'package:employee_list_app/utils/model_current.dart';
-import 'package:employee_list_app/utils/model_previous.dart';
 
 import 'package:employee_list_app/widgets/current_employee.dart';
 import 'package:employee_list_app/widgets/prev_employee.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
-  List<EmployeeModelPrevious> employeeListPrev = [];
-
-  List<EmployeeModelCurrent> employeeListCurr = [];
-
-  Future<void> getAllData() async {
-    final addHiveCurrentDB =
-        await Hive.openBox<EmployeeModelCurrent>("current_employee");
-    employeeListCurr.addAll(addHiveCurrentDB.values);
-
-    final addHivePreviousDB =
-        await Hive.openBox<EmployeeModelPrevious>("previous_employee");
-    employeeListPrev.addAll(addHivePreviousDB.values);
-  }
 
   @override
   Widget build(BuildContext context) {
-    getAllData();
-    print(employeeListCurr.toString());
     return Consumer<EmployeeProvider>(
       builder: (context, value, child) {
         return Scaffold(

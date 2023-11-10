@@ -35,10 +35,12 @@ class EmployeeProvider extends ChangeNotifier {
   Future<void> getAllData() async {
     final addHiveCurrentDB =
         await Hive.openBox<EmployeeModelCurrent>("current_employee");
+    employeeListCurr.clear();
     employeeListCurr.addAll(addHiveCurrentDB.values);
 
     final addHivePreviousDB =
         await Hive.openBox<EmployeeModelPrevious>("previous_employee");
+    employeeListPrev.clear();
     employeeListPrev.addAll(addHivePreviousDB.values);
     notifyListeners();
   }
